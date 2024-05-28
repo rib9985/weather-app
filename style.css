@@ -1,6 +1,103 @@
+body{
+  padding: 10%;
+  min-width: 100vw;
+  min-height: 100vh;
+  margin-top: 3rem;
+  gap: 10px;
+  display: flex;
+  flex-direction: column ;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  font-family: Arial, Helvetica;
+}
 
+form{
+  padding: 50px;
+  width: fit-content;
+  height: fit-content;
+  gap: 10px;
+  border-style:none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+input,select{
+  padding: 10px;
+  color: black;
+  justify-content:center;
+  width: 300px;
+  height: 10px;
+  border-style: solid;
+  border-radius:20px;
+  border-color: lightslategray;
+  background: grey;
+}
 
+select{
+  width: 230px;
+}
 
+input::placeholder, select::placeholder{
+  color: darkslateblue
+}
+
+input::placeholder:focus {
+  color: darkslateblue
+}
+
+input:invalid:focus, select:invalid:focus{
+  outline-color: darkred;
+  background-color: lightcoral
+}
+
+input:invalid, select:invalid{
+  outline-color: darkred;
+  background-color: lightcoral
+}
+
+input:focus, select:focus{
+  color: black;
+  background-color: lightgrey;
+  border-style: dotted;
+  outline-color: lightblue;
+}
+
+input:valid, select:valid{
+  outline-color: darkseagreen;
+  background-color: lightgreen
+}
+
+#submit{
+  border-radius: 35px;
+  background-color: black;
+  border-style: none;
+  color: darkgray;
+  font-size: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+#imageContainer{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px;
+  border-color: white;
+  border-style: dashed;
+  padding: 10px;
+  min-width: 60vw;
+  min-height: 60vh;
+  max-width: 70vw;
+  max-height: 70vh;
+}
+
+img{
+  position: static;
+  max-width: 20%vw;
+  max-width: 30%vh;
+}
 
 
 
