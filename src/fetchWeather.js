@@ -1,16 +1,16 @@
-export default async function fetchImage(searchImageText) {
+export default async function fetchWeatherData(query) {
 	try {
-		const img = document.querySelector('img');
 		const response = await fetch(
-			`https://api.giphy.com/v1/gifs/translate?api_key=h2qohzuFA88jV1yCN3EidYUeOPbJAwLj&s=${searchImageText}`,
+			`http://api.weatherapi.com/v1/forecast.json?key=96fbdce48ecd470ab9a205838241605&q=${query}&aqi=yes&days=6&alerts=no`,
 			{
 				mode: 'cors',
 			},
 		);
-		const imageData = await response.json();
-		img.src = imageData.data.images.original.url;
+		const weatherData = await response.json();
+		console.log(weatherData);
+		return weatherData;
 	} catch (error) {
-		alert(`No gifs found! Error: ${error.message}`);
+		alert(`No weather data found! Error: ${error.message}`);
 		console.error(error);
 	}
 }

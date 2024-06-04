@@ -1,4 +1,4 @@
-import fetchImage from './fetchImage';
+import fetchWeatherData from './fetchWeather';
 
 export default class Validate {
 	static submitForm() {
@@ -8,7 +8,7 @@ export default class Validate {
 			event.preventDefault();
 			const formState = form.checkValidity();
 			if (formState) {
-				fetchImage(searchTextContent.value);
+				const weatherData = fetchWeatherData(searchTextContent.value);
 			} else {
 				return false;
 			}
@@ -17,7 +17,7 @@ export default class Validate {
 
 	static validateInput(input) {
 		input.setCustomValidity('');
-		const regEx = new RegExp('^[a-zA-Z]+$');
+		const regEx = new RegExp('[a-zA-Z]+');
 
 		if (input.value == null || input.value == undefined || input.value == '') {
 			input.setCustomValidity(
