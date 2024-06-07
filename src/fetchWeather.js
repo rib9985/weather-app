@@ -1,3 +1,5 @@
+import { processData } from './processData';
+
 export default async function fetchWeatherData(query) {
 	try {
 		const response = await fetch(
@@ -8,7 +10,7 @@ export default async function fetchWeatherData(query) {
 		);
 		const weatherData = await response.json();
 		console.log(weatherData);
-		return weatherData;
+		return processData(weatherData);
 	} catch (error) {
 		alert(`No weather data found! Error: ${error.message}`);
 		console.error(error);

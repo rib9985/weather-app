@@ -1,4 +1,6 @@
+import { UI } from './UI';
 import fetchWeatherData from './fetchWeather';
+import processData from './processData';
 
 export default class Validate {
 	static submitForm() {
@@ -8,7 +10,17 @@ export default class Validate {
 			event.preventDefault();
 			const formState = form.checkValidity();
 			if (formState) {
-				const weatherData = fetchWeatherData(searchTextContent.value);
+				fetchWeatherData(searchTextContent.value)
+					.then((weatherData) => {
+						UI.generateAll(weatherData);
+					})
+					.catch((error) => {
+						console.log(error);
+						UI.generateError(
+							'Error displaying weather data, please try again:',
+							error,
+						);
+					});
 			} else {
 				return false;
 			}
@@ -33,8 +45,8 @@ export default class Validate {
 			input.reportValidity();
 			return;
 		}
-		if (input.value.length < 1 || input.value.length > 30) {
-			input.setCustomValidity('Input should be longer than 1 letter');
+		if (input.value.length < 3 || input.value.length > 30) {
+			input.setCustomValidity('Input should be longer than 3 letters');
 			input.reportValidity();
 			return;
 		}
