@@ -2,7 +2,6 @@ import { format } from 'date-fns';
 import { weatherDataCached } from './processData';
 
 class UI {
-	//TODO: link all UI to here
 	static generateAll(weatherData) {
 		this.clearDivs();
 		this.generateQueryInfo(weatherData);
@@ -228,7 +227,11 @@ ${chanceOfRain}%
 			'Moderate or heavy snow with thunder': 'bi bi-cloud-lightning-rain-fill',
 		};
 
-		return `${conditionIconObject[conditionText]}` || 'bi bi-cloud-fill';
+		if (conditionIconObject[conditionText]) {
+			return `${conditionIconObject[conditionText]}`;
+		} else {
+			return 'bi bi-cloud-fill';
+		}
 	}
 }
 
@@ -274,6 +277,23 @@ ${this.maxTemp}${this.unitsTextHtml}
 	}
 }
 
+class loadComponent {
+	static createLoadingScreen() {
+		const loadingHtml = `
+<div id='loadingData'>
+	<i class="bi bi-hourglass-split"></i>
+	</div>
+`;
+		const searchDiv = document.getElementById('searchDiv');
+		searchDiv.insertAdjacentHTML('afterend', loadingHtml);
+	}
+
+	static removeLoading() {
+		const loadingDataDiv = document.getElementById('loadingData');
+		loadingDataDiv.remove();
+	}
+}
+
 class uiLogic {
 	static buttonUnitsChange() {
 		const buttonUnits = document.getElementById('buttonUnits');
@@ -292,4 +312,4 @@ class uiLogic {
 	}
 }
 
-export { uiLogic, UI };
+export { uiLogic, loadComponent, UI };

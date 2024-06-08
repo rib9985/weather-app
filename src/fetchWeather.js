@@ -12,7 +12,6 @@ export default async function fetchWeatherData(query) {
 		console.log(weatherData);
 		return processData(weatherData);
 	} catch (error) {
-		alert(`No weather data found! Error: ${error.message}`);
 		console.error(error);
 	}
 }

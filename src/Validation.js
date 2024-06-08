@@ -1,4 +1,4 @@
-import { UI } from './UI';
+import { UI, loadComponent } from './UI';
 import fetchWeatherData from './fetchWeather';
 import processData from './processData';
 
@@ -10,14 +10,17 @@ export default class Validate {
 			event.preventDefault();
 			const formState = form.checkValidity();
 			if (formState) {
+				loadComponent.createLoadingScreen();
+				UI.clearDivs();
 				fetchWeatherData(searchTextContent.value)
 					.then((weatherData) => {
+						loadComponent.removeLoading();
 						UI.generateAll(weatherData);
 					})
 					.catch((error) => {
 						console.log(error);
 						UI.generateError(
-							'Error displaying weather data, please try again:',
+							'Error displaying weather data, please try again.',
 							error,
 						);
 					});
