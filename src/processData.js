@@ -24,6 +24,7 @@ function processData(weatherData) {
 			maxTemp: weatherData.forecast.forecastday[1].day.maxtemp_c,
 			temp: weatherData.forecast.forecastday[1].day.avgtemp_c,
 			condition: weatherData.forecast.forecastday[1].day.condition.text,
+			dayCss: 'dayOne',
 		},
 		dayThreeInfo: {
 			date: weatherData.forecast.forecastday[2].date,
@@ -31,6 +32,7 @@ function processData(weatherData) {
 			maxTemp: weatherData.forecast.forecastday[2].day.maxtemp_c,
 			temp: weatherData.forecast.forecastday[2].day.avgtemp_c,
 			condition: weatherData.forecast.forecastday[2].day.condition.text,
+			dayCss: 'dayTwo',
 		},
 		dayFourInfo: {
 			date: weatherData.forecast.forecastday[3].date,
@@ -38,6 +40,7 @@ function processData(weatherData) {
 			maxTemp: weatherData.forecast.forecastday[3].day.maxtemp_c,
 			temp: weatherData.forecast.forecastday[3].day.avgtemp_c,
 			condition: weatherData.forecast.forecastday[3].day.condition.text,
+			dayCss: 'dayThree',
 		},
 	};
 	const farenheitData = {
@@ -57,6 +60,7 @@ function processData(weatherData) {
 			maxTemp: weatherData.forecast.forecastday[1].day.maxtemp_f,
 			temp: weatherData.forecast.forecastday[1].day.avgtemp_f,
 			condition: weatherData.forecast.forecastday[1].day.condition.text,
+			dayCss: 'dayOne',
 		},
 		dayThreeInfo: {
 			date: weatherData.forecast.forecastday[2].date,
@@ -64,6 +68,7 @@ function processData(weatherData) {
 			maxTemp: weatherData.forecast.forecastday[2].day.maxtemp_f,
 			temp: weatherData.forecast.forecastday[2].day.avgtemp_f,
 			condition: weatherData.forecast.forecastday[2].day.condition.text,
+			dayCss: 'dayTwo',
 		},
 		dayFourInfo: {
 			date: weatherData.forecast.forecastday[3].date,
@@ -71,6 +76,7 @@ function processData(weatherData) {
 			maxTemp: weatherData.forecast.forecastday[3].day.maxtemp_f,
 			temp: weatherData.forecast.forecastday[3].day.avgtemp_f,
 			condition: weatherData.forecast.forecastday[3].day.condition.text,
+			dayCss: 'dayThree',
 		},
 	};
 

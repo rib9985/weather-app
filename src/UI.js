@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { weatherDataCached } from './processData';
 
 class UI {
@@ -6,6 +7,7 @@ class UI {
 		this.clearDivs();
 		this.generateQueryInfo(weatherData);
 		this.generateCurrentWeather(weatherData);
+		this.generateForecast(weatherData);
 	}
 
 	static generateQueryInfo(weatherData) {
@@ -93,7 +95,43 @@ ${chanceOfRain}%
 		currentDiv.innerHTML += html;
 	}
 
-	static generateForecast(weatherData, unitsSettings) {}
+	static generateForecast(weatherData) {
+		const forecastDataDiv = document.getElementById('forecastDataDiv');
+		const unitsSettings = this.getUnitsValue();
+		let unitsObject = null;
+		switch (unitsSettings) {
+			case '°C':
+				unitsObject = weatherData.celsiusData;
+				break;
+
+			case '°F':
+				unitsObject = weatherData.farenheitData;
+				break;
+
+			default:
+				unitsObject = weatherData.celsiusData;
+				break;
+		}
+
+		const initialHtml = `
+    <div id="forecastTitle" class="bi bi-calendar3-week-fill">
+      3-Day Forecast
+    </div>
+`;
+
+		const dayOneForecast = new forecastObject(
+			unitsObject.dayTwoInfo,
+		).generateHtml();
+		const dayTwoForecast = new forecastObject(
+			unitsObject.dayThreeInfo,
+		).generateHtml();
+		const dayThreeForecast = new forecastObject(
+			unitsObject.dayFourInfo,
+		).generateHtml();
+
+		forecastDataDiv.innerHTML +=
+			initialHtml + dayOneForecast + dayTwoForecast + dayThreeForecast;
+	}
 
 	static generateError(errorMessage) {
 		this.clearDivs();
@@ -196,9 +234,44 @@ ${chanceOfRain}%
 
 //TODO: Create a forecast constructor to reduce code size
 class forecastObject {
-	constructor() {}
+	constructor(day) {
+		this.dayCss = day.dayCss;
+		this.condition = day.condition;
+		this.conditionIcon = UI.generateCoditionIcon(this.condition);
+		this.temp = day.temp;
+		this.minTemp = day.minTemp;
+		this.maxTemp = day.maxTemp;
+		this.date = this.getDate(day.date);
+		this.unitsTextHtml = UI.getUnitsValue();
+	}
 
-	generate() {}
+	getDate(date) {
+		const weekDay = format(date, 'EEEE dd/MM/yyyy');
+		return weekDay;
+	}
+
+	generateHtml() {
+		const html = `
+    <div id="${this.dayCss}Forecast">
+      <div id="${this.dayCss}Date">
+${this.date}
+      </div>
+
+      <div id="${this.dayCss}Avg" class="${this.conditionIcon}">
+${this.temp}${this.unitsTextHtml}
+      </div>
+      <div id="${this.dayCss}MinMax">
+        <i class="bi bi-arrow-down-short"></i>
+${this.minTemp}${this.unitsTextHtml}
+
+        <i class="bi bi-arrow-up-short"></i>
+${this.maxTemp}${this.unitsTextHtml}
+
+      </div>
+    </div>
+`;
+		return html;
+	}
 }
 
 class uiLogic {
@@ -206,7 +279,15 @@ class uiLogic {
 		const buttonUnits = document.getElementById('buttonUnits');
 		buttonUnits.addEventListener('click', function () {
 			UI.changeUnitsButttonDisplay();
-			UI.generateAll(weatherDataCached[0]);
+			if (
+				weatherDataCached[0] === null ||
+				weatherDataCached[0] === '' ||
+				weatherDataCached[0] === undefined
+			) {
+				return;
+			} else {
+				UI.generateAll(weatherDataCached[0]);
+			}
 		});
 	}
 }
