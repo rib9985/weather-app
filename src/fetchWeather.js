@@ -3,7 +3,7 @@ import { processData } from './processData';
 export default async function fetchWeatherData(query) {
 	try {
 		const response = await fetch(
-			`http://api.weatherapi.com/v1/forecast.json?key=96fbdce48ecd470ab9a205838241605&q=${query}&aqi=yes&days=6&alerts=no`,
+			`https://api.weatherapi.com/v1/forecast.json?key=96fbdce48ecd470ab9a205838241605&q=${query}&aqi=yes&days=6&alerts=no`,
 			{
 				mode: 'cors',
 			},
